@@ -7,6 +7,7 @@
 package controllers;
 
 import java.io.File;
+import java.io.FileInputStream;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,7 +26,7 @@ public class Game {
 	private static boolean imageError = false;
 	private int MAX_ROUNDS = 26;
 	private final String absolutePath = (new File("")).getAbsolutePath();
-	private final String imgPath = "file:" + absolutePath + "/resources/imgs/deck/";
+	private final String imgPath = "file:" + absolutePath + "/lib/imgs/deck/";
 //	private final String imgPath = "file:" + "/";
 
 // constructor for Game
@@ -101,16 +102,18 @@ public class Game {
 // returns a Stack Pane with images in the form of a deck
 	public ImageView getDeckImage() {
 		Image img = null;
+
+		String path = new File("").getAbsolutePath();
+		String imgDir = "/lib/imgs/deck";
 		try {
-//			Image img = new Image(imgPath + 0 + ".bmp");
-//			Image img = new Image(ResourceLoader.load(0 + ".bmp"));
-			img = new Image(this.getClass().getResourceAsStream("/" + 0 + ".png"));
+			img = new Image(new FileInputStream(path.concat(imgDir).concat("/" + 0 +".png")));
 
 			if (img.isError() == true) {
 				imageError = true;
 			}
 
 		} catch (Exception e) {
+			System.out.println(e);
 			return null;
 		}
 		ImageView iv = new ImageView();
